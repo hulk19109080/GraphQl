@@ -1,0 +1,155 @@
+graphql -> powerful query language
+allow for more flexible and efficient and REST
+
+
+RESTFUL -> APPROACH
+
+Endpoint for getting a book
+books/:id
+
+Endpoint for author nfo
+authors/:id
+
+
+GRAPHQL->APPROACH
+
+{
+    books(id=123){
+        title
+        name
+        reviews
+        author{ ->author of that books and its info
+            name
+            bio
+            books{
+                name
+            }
+        }
+    }
+}
+
+
+
+
+LESSON->2
+
+FRONT END APPLICATION--------------> get all books
+/books
+
+single books 
+books/:id
+
+get all authors 
+authors 
+
+get a single author
+authors/:id
+
+GRAPHQL APPROACH
+{
+    book(id=1){
+        title
+        genre
+        author{
+            name
+            age{
+books{
+    name
+}
+            }
+        }
+    }
+}
+
+
+will send all this in front end 
+and we will make this as a single query
+
+
+LESSON-3
+server(express + graphql server)<-------> mongodb<-----------------> react app+ apollo(alow to use 
+graphql on the frontend)
+
+
+LESSON-4
+Demo of the graphql tool
+the graphql understand the query as the string form
+
+
+
+LESSON-5
+express + express-graphql installation
+
+LESSON-6
+
+install graphql--->
+intsall express-graphql->to communicate with express app
+{graphqlHTTP}->instance express-graphql
+intraction is done by using the graphqlHTTP as a middleware
+as end point to send queries
+app.use("/graphql",graphqlHTTP({    and make it to be handled by the graphqlHTTP
+
+})) empty will lead error as must contain schema
+that is include a schema in middlware
+schema->datatypes + structure of query +realtioonships between them 
+
+LESON-7
+schema.js
+require("graphql")
+define the schema->(object type+ realtionships +how we can reach them(rootqueries))
+define author and books
+{graphqlobjecttype} ->helps in building schema(its a function)
+{graphqlstringtype}->special type of string consist in the graphql
+const booktype= new graphqlobjecttype({
+    //what this is all about
+    name:"book",
+    fields:()=>({
+        its a function as if we have mutiple type reeferneing one another 
+        //then if we not wrap it in a function not able to know  which kind of its type
+        id:{type:graphqlstringtype}
+        name:{type :graphqlstringtype}
+        grenre:{type:graphqlstringtype}
+    })
+})
+
+
+
+
+LESSON->8
+rootqueries->the starting data we get just after the middleware
+const rootquery =new graphqlobjecttype({
+    name:"rootqueriestype"
+    same as we do in the REST
+    fields:{
+        no need of wrapping in the function
+        book:{
+            type:booktype,
+            args:{id:{type:graphqlstring}}// act as the arguments that passed in the function
+            //as in function parameter
+            resolve(parent,args){
+                // this is the function where we write code
+                //what data we need from the source db/other source
+            }
+        }
+    }
+})
+modeule.exports =new graphqlschema({
+    query:rootqueries
+})
+
+LESSON->13
+Type-reltaions
+books with the author that written by it
+author who has written all that books
+
+LESSON->18
+Mutations-> allow to change update edit delete these are all Mutations
+define seperately
+
+
+LESSON->22
+
+For making more intractive we use the react +apollo in frontend 
+apollo-> to understand by graphql making queries in/from the client side 
+so that it get the data and we bind that apollo client with each and every component
+make queries possible from client side too

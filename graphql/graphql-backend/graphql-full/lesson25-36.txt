@@ -1,0 +1,4 @@
+LESSON->25
+in order to use graphql and use the graphql in the client side
+use grapqh lclient which use the same as we use jquey and axios to send requets
+the example of graphql client->apollo server can use with vue angular etc

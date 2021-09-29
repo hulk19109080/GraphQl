@@ -1,0 +1,4 @@
+Imp ->
+schema ->
+Resolvers ->
+configuration -> done in the index.js
